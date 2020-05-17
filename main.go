@@ -1,7 +1,6 @@
 package main
 
 //go:generate go run main.go
-//148afcc15f7feb292e66bd55a3bd943d11b05d71
 import (
 	"context"
 	"fmt"
@@ -74,7 +73,7 @@ func getRepoCommitData(username string, repo string) map[string]int {
 	data := make(map[string]int)
 	context := context.Background()
 	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: "148afcc15f7feb292e66bd55a3bd943d11b05d71"},
+		&oauth2.Token{AccessToken: ""},
 	)
 	tc := oauth2.NewClient(context, ts)
 

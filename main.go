@@ -1,27 +1,28 @@
 package main
 
 //go:generate go run main.go
+
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/google/go-github/github"
+	"github.com/joho/godotenv"
 	"github.com/wcharczuk/go-chart"
 	"golang.org/x/oauth2"
 )
 
-// ListOptions specifies the optional parameters to various List methods that
-// support pagination.
-type ListOptions struct {
-	// For paginated result sets, the number of results to include per page.
-	PerPage int `url:"per_page,omitempty"`
-}
-
 func main() {
-	//ngx-lottie/ngx-lottie
-	username := "ngx-lottie"
-	repo := "ngx-lottie"
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	username := "riazXrazor"
+	repo := "udemy-dl"
 	var bars []chart.Value
 	data := getRepoCommitData(username, repo)
 
@@ -59,7 +60,7 @@ func main() {
 			},
 		},
 		Height:   400,
-		BarWidth: 50,
+		BarWidth: 30,
 		Bars:     bars,
 	}
 
@@ -69,11 +70,11 @@ func main() {
 }
 
 func getRepoCommitData(username string, repo string) map[string]int {
-
+	TOKEN := os.Getenv("PERSONAL_ACCESS_TOKEN")
 	data := make(map[string]int)
 	context := context.Background()
 	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: ""},
+		&oauth2.Token{AccessToken: TOKEN},
 	)
 	tc := oauth2.NewClient(context, ts)
 

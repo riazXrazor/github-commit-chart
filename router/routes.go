@@ -7,15 +7,20 @@ import (
 )
 
 // Routers type for router
-var Routers = []Router{
-	{
-		path:    "/",
-		method:  http.MethodGet,
-		handler: controller.Index(),
+var Routers = map[string][]Router{
+	// group
+	"api": {
+		{
+			path:    "/github/{username}/{repo}",
+			method:  http.MethodGet,
+			handler: controller.GithubRepoCommitInfo(),
+		},
 	},
-	{
-		path:    "/home",
-		method:  http.MethodGet,
-		handler: controller.Index(),
+	"chart": {
+		{
+			path:    "/{username}/{repo}",
+			method:  http.MethodGet,
+			handler: controller.GenerateCommitChart(),
+		},
 	},
 }

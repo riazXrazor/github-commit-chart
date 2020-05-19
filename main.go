@@ -15,12 +15,5 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	// username := "riazXrazor"
-	// repo := "udemy-dl"
-
-	// data := GetRepoCommitData(username, repo)
-
-	// GenerateChart(data, username, repo)
-
 	ServerInit()
 }

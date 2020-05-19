@@ -20,19 +20,23 @@ var r = mux.NewRouter()
 func Init() *mux.Router {
 
 	STATICPATH := os.Getenv("STATICPATH")
-	api := r.PathPrefix("/api/").Subrouter()
-	for _, route := range Routers {
-		api.Path(route.path).
-			Methods(route.method).
-			HandlerFunc(route.handler)
+	PUBLICDIR := os.Getenv("PUBLICDIR")
+
+	for group, routes := range Routers {
+		api := r.PathPrefix("/" + group + "/").Subrouter()
+		for _, route := range routes {
+			api.Path(route.path).
+				Methods(route.method).
+				HandlerFunc(route.handler)
+		}
 	}
 
 	// Serve static files
-	r.PathPrefix(STATICPATH).Handler(http.StripPrefix(STATICPATH, http.FileServer(http.Dir("./client/public/static/"))))
+	r.PathPrefix(STATICPATH).Handler(http.StripPrefix(STATICPATH, http.FileServer(http.Dir(PUBLICDIR+STATICPATH))))
 
 	// Serve index page on all unhandled routes
 	r.PathPrefix("/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "./client/public/index.html")
+		http.ServeFile(w, r, PUBLICDIR+"index.html")
 	})
 
 	return r

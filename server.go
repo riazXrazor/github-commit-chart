@@ -24,6 +24,6 @@ func ServerInit() {
 		WriteTimeout: 30 * time.Second,
 		ReadTimeout:  30 * time.Second,
 	}
-	ctx.Info("starting up...")
+	ctx.Info("starting up at " + ADDRESS + "...")
 	ctx.WithError(srv.ListenAndServe()).Error("failed to start up server")
 }

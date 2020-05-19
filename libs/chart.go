@@ -1,14 +1,13 @@
-package main
+package libs
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/wcharczuk/go-chart"
 )
 
 // GenerateChart generate chart from repo commits
-func GenerateChart(data map[string]int, username, repo string) {
+func GenerateChart(data map[string]int, username, repo string) *chart.BarChart {
 	var bars []chart.Value
 	for key, value := range data {
 
@@ -28,6 +27,7 @@ func GenerateChart(data map[string]int, username, repo string) {
 			},
 		},
 		XAxis: chart.Style{
+			Show:        true,
 			StrokeWidth: 1,
 			FontSize:    5,
 		},
@@ -39,16 +39,15 @@ func GenerateChart(data map[string]int, username, repo string) {
 				return ""
 			},
 			Style: chart.Style{
+				Show:        true,
 				StrokeWidth: 1,
-				FontSize:    5,
+				FontSize:    7,
 			},
 		},
 		Height:   400,
-		BarWidth: 30,
+		BarWidth: 25,
 		Bars:     bars,
 	}
 
-	f, _ := os.Create("output.png")
-	defer f.Close()
-	graph.Render(chart.PNG, f)
+	return &graph
 }

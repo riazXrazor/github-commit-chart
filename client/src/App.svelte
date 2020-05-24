@@ -2,13 +2,38 @@
   import { Highlight } from "svelte-highlight";
   import { markdown } from "svelte-highlight/languages";
   import { anOldHope } from "svelte-highlight/styles";
-  export let header;
 
+  export let header;
+  let repo = "";
   let url = window.location.pathname;
 
-  // fetch(`/chart${url}`)
-  //   .then(r => r.text())
-  //   .then(r => console.log(r));
+  const checkRepo = event => {
+    const key = event.key;
+    const keyCode = event.keyCode;
+    if (key === "Enter" || keyCode === 13) {
+      if (!repo) {
+        alert("Please enter username/repo");
+        return;
+      }
+
+      fetch(`/api/github/check/${repo}`)
+        .then(r => r.json())
+        .then(r => {
+          if (r.status === 200) {
+            window.location.href = `/${repo}`;
+          } else {
+            alert(`Repo "${repo}" does not exists.`);
+          }
+        });
+    }
+  };
+
+  const onCopy = () => {
+    navigator.clipboard
+      .writeText(code)
+      .then(() => alert("successfully copied to clipboard!"))
+      .catch(e => alert("Could not copy!!"));
+  };
 
   $: code = `## github commit chart over time
 
@@ -66,10 +91,39 @@
     font-size: 1.2em;
   }
 
+  .repoinput {
+    width: 30%;
+    margin: 0 auto;
+  }
+  .repoinput input {
+    border-radius: 20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .repoinput input:hover {
+    outline: none;
+  }
+
   @media (min-width: 640px) {
     main {
       max-width: none;
     }
+  }
+
+  .copy {
+    color: #494949 !important;
+    text-transform: capitalize;
+    text-decoration: none;
+    background: #ffffff;
+    padding: 10px;
+    border: 1px solid #494949 !important;
+    display: inline-block;
+    border-radius: 50px;
+  }
+
+  .copy:hover {
+    cursor: pointer;
   }
 </style>
 
@@ -82,11 +136,20 @@
     {header}
     <small>Plot github repository commit over time.</small>
   </h1>
-  <p>
-    Generate chart by browsing to user/repo, for example,
-    <a href="riazXrazor/udemy-dl">riazXrazor/udemy-dl</a>
-  </p>
-  {#if url.length}
+  {#if url === '/'}
+    <p>
+      Generate chart by browsing to user/repo, for example,
+      <a href="riazXrazor/udemy-dl">riazXrazor/udemy-dl</a>
+    </p>
+    <div class="repoinput">
+      <input
+        on:keydown={checkRepo}
+        bind:value={repo}
+        placeholder="Enter Your username/repo eg. riazXrazor/udemy-dl"
+        type="text" />
+    </div>
+  {/if}
+  {#if url !== '/'}
     <div class="output">
       <div class="chart">
         <img src="/chart{url}" alt="" />
@@ -94,6 +157,9 @@
       <div class="code">
         <Highlight language={markdown} {code} />
       </div>
+
+      <button class="copy" on:click={onCopy}>Copy markdown to clipboard</button>
+
     </div>
   {/if}
 </main>

@@ -18,6 +18,7 @@ func Index() http.HandlerFunc {
 	}
 }
 
+// CommitInfo display landing page
 type CommitInfo struct {
 	Date        string `json:"date"`
 	NoOfCommits string `json:"no_of_commits"`
@@ -49,5 +50,17 @@ func GenerateCommitChart() http.HandlerFunc {
 		g := libs.GenerateChart(data, username, repo)
 
 		g.Render(chart.SVG, w)
+	}
+}
+
+// CheckGithubRepoExists check repo exists
+func CheckGithubRepoExists() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		username := mux.Vars(r)["username"]
+		repo := mux.Vars(r)["repo"]
+
+		data := libs.CheckGithubRepo(username, repo)
+		json, _ := json.Marshal(data)
+		fmt.Fprint(w, string(json))
 	}
 }

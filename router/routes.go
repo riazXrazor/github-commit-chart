@@ -15,6 +15,11 @@ var Routers = map[string][]Router{
 			method:  http.MethodGet,
 			handler: controller.GithubRepoCommitInfo(),
 		},
+		{
+			path:    "/github/check/{username}/{repo}",
+			method:  http.MethodGet,
+			handler: controller.CheckGithubRepoExists(),
+		},
 	},
 	"chart": {
 		{

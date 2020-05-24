@@ -29,7 +29,7 @@ func GenerateChart(data map[string]int, username, repo string) *chart.BarChart {
 		XAxis: chart.Style{
 			Show:        true,
 			StrokeWidth: 1,
-			FontSize:    5,
+			FontSize:    6,
 		},
 		YAxis: chart.YAxis{
 			ValueFormatter: func(v interface{}) string {
@@ -45,7 +45,7 @@ func GenerateChart(data map[string]int, username, repo string) *chart.BarChart {
 			},
 		},
 		Height:   400,
-		BarWidth: 25,
+		BarWidth: 10,
 		Bars:     bars,
 	}
 

@@ -20,11 +20,11 @@ func GetRepoCommitData(username, repo string) map[string]int {
 	tc := oauth2.NewClient(context, ts)
 
 	client := github.NewClient(tc)
-	options := &github.CommitsListOptions{
-		ListOptions: github.ListOptions{PerPage: 50},
-	}
+	// options := &github.CommitsListOptions{
+	// 	ListOptions: github.ListOptions{PerPage: 50},
+	// }
 
-	commitInfo, _, err := client.Repositories.ListCommits(context, username, repo, options)
+	commitInfo, _, err := client.Repositories.ListCommits(context, username, repo, nil)
 	if err != nil {
 		fmt.Printf("Problem in getting repository information %v\n", err)
 		os.Exit(1)
@@ -39,6 +39,28 @@ func GetRepoCommitData(username, repo string) map[string]int {
 		}
 		data[day] = data[day] + 1
 	}
+
+	return data
+}
+
+// CheckGithubRepo check github repo
+func CheckGithubRepo(username, repo string) map[string]int {
+	TOKEN := os.Getenv("PERSONAL_ACCESS_TOKEN")
+	data := make(map[string]int)
+	context := context.Background()
+	ts := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: TOKEN},
+	)
+	tc := oauth2.NewClient(context, ts)
+
+	client := github.NewClient(tc)
+
+	_, _, err := client.Repositories.ListCommits(context, username, repo, nil)
+	if err != nil {
+		data["status"] = 404
+	}
+
+	data["status"] = 200
 
 	return data
 }

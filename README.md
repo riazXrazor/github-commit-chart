@@ -1,6 +1,6 @@
 # github-commit-chart
 
-Plot github repository commit over time.
+Plot github repository commit over time build with `go` and `svelteJS`
 
 ## github commit chart over time
 

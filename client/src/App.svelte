@@ -101,7 +101,8 @@
     text-align: center;
   }
 
-  .repoinput input:hover {
+  .repoinput input:hover,
+  .repoinput input:focus {
     outline: none;
   }
 

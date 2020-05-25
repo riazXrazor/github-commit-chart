@@ -20,6 +20,15 @@ func GenerateChart(data map[string]int, username, repo string) *chart.BarChart {
 
 	graph := chart.BarChart{
 		Title: "Commit activity for " + username + "/" + repo,
+		TitleStyle: chart.Style{
+			Padding: chart.Box{
+				Bottom: 50,
+				Left:   50,
+				Right:  50,
+			},
+			Show:     true,
+			FontSize: 12,
+		},
 		Background: chart.Style{
 			Padding: chart.Box{
 				Top:   40,

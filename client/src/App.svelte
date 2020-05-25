@@ -140,15 +140,15 @@
   {#if url === '/'}
     <p>
       Generate chart by browsing to user/repo, for example,
-      <a href="https://commitchart.xyz/riazXrazor/udemy-dl">
-        riazXrazor/udemy-dl
+      <a href="https://commitchart.xyz/riazXrazor/github-commit-chart">
+        riazXrazor/github-commit-chart
       </a>
     </p>
     <div class="repoinput">
       <input
         on:keydown={checkRepo}
         bind:value={repo}
-        placeholder="Enter Your username/repo eg. riazXrazor/udemy-dl"
+        placeholder="Enter Your username/repo eg. riazXrazor/github-commit-chart"
         type="text" />
     </div>
   {/if}

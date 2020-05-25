@@ -37,7 +37,7 @@
 
   $: code = `## github commit chart over time
 
-[![github commit chart over time](https://commitchart.xyz${url})](https://commitchart.xyz${url})`;
+[![github commit chart over time](https://commitchart.xyz/chart${url})](https://commitchart.xyz/chart${url})`;
 </script>
 
 <style>

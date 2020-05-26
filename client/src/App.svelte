@@ -137,6 +137,11 @@
     .chart,
     .code {
       width: 99%;
+      font-size: 0.8em;
+    }
+
+    .copy {
+      font-size: 0.8em;
     }
 
     h1 {

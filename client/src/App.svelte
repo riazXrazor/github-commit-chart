@@ -106,12 +106,6 @@
     outline: none;
   }
 
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-
   .copy {
     color: #494949 !important;
     text-transform: capitalize;
@@ -125,6 +119,33 @@
 
   .copy:hover {
     cursor: pointer;
+  }
+
+  @media (min-width: 640px) {
+    main {
+      max-width: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    main {
+      max-width: 100%;
+    }
+    .repoinput {
+      width: 90%;
+    }
+    .chart,
+    .code {
+      width: 99%;
+    }
+
+    h1 {
+      font-size: 1.5em;
+    }
+
+    p {
+      font-size: 0.8em;
+    }
   }
 </style>
 

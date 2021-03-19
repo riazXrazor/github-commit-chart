@@ -37,7 +37,7 @@
 
   $: code = `## github commit chart over time
 
-[![github commit chart over time](https://commitchart.xyz/chart${url})](https://commitchart.xyz/chart${url})`;
+[![github commit chart over time](https://github-commit-chart.herokuapp.com/chart${url})](https://github-commit-chart.herokuapp.com/chart${url})`;
 </script>
 
 <style>
@@ -166,7 +166,7 @@
   {#if url === '/'}
     <p>
       Generate chart by browsing to user/repo, for example,
-      <a href="https://commitchart.xyz/riazXrazor/github-commit-chart">
+      <a href="/riazXrazor/github-commit-chart">
         riazXrazor/github-commit-chart
       </a>
     </p>

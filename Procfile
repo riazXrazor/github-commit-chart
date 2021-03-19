@@ -1,1 +1,0 @@
-web: ./github-commit-chart

@@ -1,1 +1,1 @@
-web: ./main
+web: ./github-commit-chart

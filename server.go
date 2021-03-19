@@ -13,17 +13,16 @@ import (
 // ServerInit start the server
 func ServerInit() {
 	PORT := os.Getenv("PORT")
-	ADDRESS := os.Getenv("ADDRESS")
 	var ctx = log.WithField("port", PORT)
 
 	r := router.Init()
 
 	var srv = &http.Server{
 		Handler:      httplog.New(r),
-		Addr:         ADDRESS + ":" + PORT,
+		Addr:         ":" + PORT,
 		WriteTimeout: 30 * time.Second,
 		ReadTimeout:  30 * time.Second,
 	}
-	ctx.Info("starting up at " + ADDRESS + "...")
+	ctx.Info("starting up at " + ":" + PORT + "...")
 	ctx.WithError(srv.ListenAndServe()).Error("failed to start up server")
 }

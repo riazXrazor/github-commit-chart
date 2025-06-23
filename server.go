@@ -13,11 +13,11 @@ import (
 // ServerInit start the server
 func ServerInit() {
 	PORT := os.Getenv("PORT")
-	var ctx = log.WithField("port", PORT)
+	ctx := log.WithField("port", PORT)
 
 	r := router.Init()
 
-	var srv = &http.Server{
+	srv := &http.Server{
 		Handler:      httplog.New(r),
 		Addr:         ":" + PORT,
 		WriteTimeout: 30 * time.Second,

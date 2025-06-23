@@ -37,7 +37,7 @@
 
   $: code = `## github commit chart over time
 
-[![github commit chart over time](https://github-commit-chart.herokuapp.com/chart${url})](https://github-commit-chart.herokuapp.com/chart${url})`;
+[![github commit chart over time](https://commit-chart.fly.dev/chart${url})](https://commit-chart.fly.dev/chart${url})`;
 </script>
 
 <style>
